@@ -1,0 +1,95 @@
+body {
+	font-family: Verdana, Helvetica, sans-serif;
+	margin:0;
+}
+
+
+.navbar
+{
+	overflow: hidden;
+	background-color: grey;
+}
+
+.navbar a 
+{
+	font-size: 20px;
+	text-decoration: none;
+	text-align:center;
+	color: #000;
+	float:left;
+	padding: 14px 16px;
+}
+
+.navbar a.active
+{
+	background-color:#333;
+	color:red;
+}
+
+.navbar a:hover
+{
+	background-color:#ddd;
+	color:green;
+}
+
+.typewriter h1 {
+	padding:15px;
+  overflow: hidden; 
+  white-space: nowrap;
+  letter-spacing: .15em; 
+  margin:0;
+  animation: 
+    typing 3.5s steps(40, end),
+    blink-caret .75s step-end infinite;
+}
+
+
+@keyframes typing {
+  from { width: 0% }
+  to { width: 50% }
+}
+
+
+@keyframes blink-caret {
+  from, to { border-color: transparent }
+  50% { border-color: orange; }
+}
+
+button {
+  border-radius: 4px;
+  background-color: grey;
+  border: none;
+  color: #FFFFFF;
+  text-align: center;
+  font-size: 28px;
+  padding: 40px;
+  width: 200px;
+  transition: all 0.5s;
+  cursor: pointer;
+  margin: 5px;
+  display:inline-block;
+}
+
+button span {
+  cursor: pointer;
+  position: relative;
+  transition: 0.5s;
+}
+
+button span:after {
+  content: '\00bb';
+  position: absolute;
+  opacity: 0;
+  top: 0;
+  right: -20px;
+  transition: 0.5s;
+}
+
+button:hover span {
+  padding-right: 25px;
+}
+
+button:hover span:after {
+  opacity: 1;
+  right: 0;
+}
