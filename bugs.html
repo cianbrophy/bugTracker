@@ -1,0 +1,57 @@
+<!DOCTYPE html>
+<html lang ="en">
+<head>
+    <link rel="stylesheet" type = "text/css" href="main.css">
+    <title>Java Bug Tracker</title>
+</head>
+<body>
+    <div class="navbar">
+        <a>Home</a>
+        <a>Bugs</a>
+        <a>Developers</a>
+    </div>
+        <div class="column">
+          <h4>Bugs</h4>
+          <div class="background">
+              <table class="tablez">
+                <thead>
+                  <tr>
+                    <th>#</th>
+                    <th>Name</th>
+                    <th>Description</th>
+                    <th>Priority</th>
+                    <th>Edit</th>
+                   </tr>
+                </thead> 
+              </table>
+          </div>
+        </div>
+        
+        <div class="formColumn">
+          <h4>Bug Report Form</h4>
+          <div class="background">
+          <form name="bugForm" action="--" method="post">
+
+                <div class="space">
+                  <label>Title</label>
+                  <input name="title" type="text">
+                </div>
+              
+                <div class="space">
+                  <label>Description</label>
+                  <input name="desciption" type="text">
+                </div>
+                
+                <div class="space">
+                  <label>Priority</label>
+                  <input name="priority" type="text">
+                </div>
+
+                <div class="space">
+                    <input type="submit" class="submit" value="Submit Survey">
+                </div>
+          </form>
+          </div>
+        </div>
+</body>
+</html>
