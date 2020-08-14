@@ -3,6 +3,39 @@
 <head>
     <link rel="stylesheet" type = "text/css" href="main.css">
     <title>Java Bug Tracker ++ Bugs</title>
+    <script>
+      function newBug() {
+        var td = document.createElement("td");
+        var inputValue = document.getElementbyId("input").value;
+        var t = document.createTextNode(input);
+        td.appendChild(t);
+
+        if (input = '')
+        {
+          alert("Please fill in all text boxes");
+        }
+        else 
+        {
+
+          document.getElementById("myTable").appendChild(li);
+        }
+        
+  document.getElementById("input").value = "";
+
+  var span = document.createElement("SPAN");
+  var txt = document.createTextNode("\u00D7");
+  span.className = "close";
+  span.appendChild(txt);
+  td.appendChild(span);
+
+  for (i = 0; i < close.length; i++) {
+    close[i].onclick = function() {
+      var div = this.parentElement;
+      div.style.display = "none";
+    }
+  }
+      }
+    </script>
 </head>
 <body>
     <div class="navbar">
@@ -13,14 +46,12 @@
         <div class="column">
           <h4>Bugs</h4>
           <div class="background">
-              <table class="tablez">
+              <table class="tablez" id = "myTable">
                 <thead>
                   <tr>
-                    <th>#</th>
                     <th>Name</th>
                     <th>Description</th>
                     <th>Priority</th>
-                    <th>Edit</th>
                    </tr>
                 </thead> 
               </table>
@@ -30,25 +61,24 @@
         <div class="formColumn">
           <h4>Bug Report Form</h4>
           <div class="background">
-          <form name="bugForm" action="--" method="post">
-
+          <form name="bugForm">
                 <div class="space">
-                  <label>Title</label>
-                  <input name="title" type="text">
+                  <label>Name</label>
+                  <input name="title" id = "input" type="text">
                 </div>
               
                 <div class="space">
                   <label>Description</label>
-                  <input name="desciption" type="text">
+                  <input name="desciption" id = "input" type="text">
                 </div>
                 
                 <div class="space">
                   <label>Priority</label>
-                  <input name="priority" type="text">
+                  <input name="priority" id = "input" type="text">
                 </div>
 
                 <div class="space">
-                    <input type="submit" class="submit" value="Submit Survey">
+                    <button onclick = "newBug()">Submit Survey</button>
                 </div>
           </form>
           </div>
