@@ -5,36 +5,24 @@
     <title>Java Bug Tracker ++ Bugs</title>
     <script>
       function newBug() {
-        var td = document.createElement("td");
-        var inputValue = document.getElementbyId("input").value;
-        var t = document.createTextNode(input);
-        td.appendChild(t);
 
-        if (input = '')
-        {
-          alert("Please fill in all text boxes");
-        }
-        else 
-        {
+    var table = document.getElementById("myTable");
+    var row= document.createElement("tr");
+    var td1 = document.createElement("td");
+    var td2 = document.createElement("td");
+    var td3 = document.createElement("td");    
 
-          document.getElementById("myTable").appendChild(li);
-        }
-        
-  document.getElementById("input").value = "";
+    td1.innerHTML = document.getElementById("titleInput").value;
+    td2.innerHTML  = document.getElementById("descInput").value;
+    td3.innerHTML  = document.getElementById("priorityInput").value;
 
-  var span = document.createElement("SPAN");
-  var txt = document.createTextNode("\u00D7");
-  span.className = "close";
-  span.appendChild(txt);
-  td.appendChild(span);
+    row.appendChild(td1);
+    row.appendChild(td2);
+    row.appendChild(td3);
 
-  for (i = 0; i < close.length; i++) {
-    close[i].onclick = function() {
-      var div = this.parentElement;
-      div.style.display = "none";
-    }
-  }
-      }
+    table.children[0].appendChild(row);
+}
+  
     </script>
 </head>
 <body>
@@ -64,21 +52,21 @@
           <form name="bugForm">
                 <div class="space">
                   <label>Name</label>
-                  <input name="title" id = "input" type="text">
+                  <input name="title" id = "titleInput" type="text">
                 </div>
               
                 <div class="space">
                   <label>Description</label>
-                  <input name="desciption" id = "input" type="text">
+                  <input name="desciption" id = "descInput" type="text">
                 </div>
                 
                 <div class="space">
                   <label>Priority</label>
-                  <input name="priority" id = "input" type="text">
+                  <input name="priority" id = "priorityInput" type="text">
                 </div>
 
                 <div class="space">
-                    <button onclick = "newBug()">Submit Survey</button>
+                    <button type ="button" onclick = "newBug()">Submit Survey</button>
                 </div>
           </form>
           </div>
