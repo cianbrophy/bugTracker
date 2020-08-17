@@ -1,0 +1,65 @@
+<!DOCTYPE html>
+<html lang ="en">
+<head>
+    <link rel="stylesheet" type = "text/css" href="main.css">
+    <title>Java Bug Tracker ++ Bugs</title>
+     <script>
+      function newDev() {
+
+    var table = document.getElementById("myTable");
+    var row= document.createElement("tr");
+    var td1 = document.createElement("td");
+    var td2 = document.createElement("td");  
+
+    td1.innerHTML = document.getElementById("fName").value;
+    td2.innerHTML  = document.getElementById("sName").value;
+    
+
+    row.appendChild(td1);
+    row.appendChild(td2);
+
+    table.children[0].appendChild(row);
+}
+  
+    </script>
+</head>
+<body>
+<div class="navbar">
+        <a href ="index.html">Home</a>
+        <a href ="bugs.html">Bugs</a>
+        <a href= "devs.html">Developers</a>
+    </div>
+    <div class="column">
+          <h4>Developers</h4>
+          <div class="background">
+              <table class="tablez" id = "myTable">
+                <thead>
+                  <tr>
+                    <th>First Name</th>
+                    <th>Second Name</th>
+                   </tr>
+                </thead> 
+              </table>
+          </div>
+        </div>
+
+        <div class="formColumn">
+          <h4>Developers Form</h4>
+          <div class="background">
+          <form name="bugForm">
+                <div class="space">
+                  <label>First Name</label>
+                  <input name="title" id = "fName" type="text">
+                </div>
+              
+                <div class="space">
+                  <label>Second Name</label>
+                  <input name="desciption" id = "sName" type="text">
+                </div>
+                
+                <div class="space">
+                    <button type ="button" onclick = "newDev()" class ="submit">Add Developer</button>
+                </div>
+          </form>
+          </div>
+        </div>
