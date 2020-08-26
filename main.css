@@ -112,6 +112,7 @@ button:hover span:after {
 .tablez {
   border-collapse: collapse;
   width: 100%;
+  text-align: left;
 }
 
 h4 {
