@@ -4,15 +4,46 @@
     <link rel="stylesheet" type = "text/css" href="main.css">
     <title>Java Bug Tracker ++ Bugs</title>
      <script>
+       var developer = [];
+
+window.onload = function() {
+    if(JSON.parse(localStorage.getItem("developer")) != null) {
+      developer = JSON.parse(localStorage.getItem("developer"));
+      console.log(developer);
+      display();
+    }
+}
+
+function display() {
+for(var i = 0; i < developer.length; i++) {
+  var table = document.getElementById("myTable");
+  var row = document.createElement("tr");
+  var td1 = document.createElement("td");
+  var td2 = document.createElement("td"); 
+
+  td1.innerHTML = developer[i];
+  td2.innerHTML  = developer[++i];
+
+  row.appendChild(td1);
+  row.appendChild(td2);
+
+  table.children[0].appendChild(row);
+  }
+}
+
       function newDev() {
 
     var table = document.getElementById("myTable");
-    var row= document.createElement("tr");
+    var row = document.createElement("tr");
     var td1 = document.createElement("td");
-    var td2 = document.createElement("td");  
+    var td2 = document.createElement("td");
 
     td1.innerHTML = document.getElementById("fName").value;
+    developer.push(document.getElementById("fName").value);
+    localStorage.setItem("developer", JSON.stringify(developer));
     td2.innerHTML  = document.getElementById("sName").value;
+    developer.push(document.getElementById("sName").value);
+    localStorage.setItem("developer", JSON.stringify(developer));
     
 
     row.appendChild(td1);

@@ -4,7 +4,37 @@
     <link rel="stylesheet" type = "text/css" href="main.css">
     <title>Java Bug Tracker ++ Bugs</title>
     <script>
-      function newBug() {
+      var elements = [];
+
+      window.onload = function() {
+          if(JSON.parse(localStorage.getItem("elements")) != null) {
+            elements = JSON.parse(localStorage.getItem("elements"));
+            console.log(elements);
+            display();
+          }
+      }
+
+    function display() {
+      for(var i = 0; i < elements.length; i++) {
+        var table = document.getElementById("myTable");
+        var row = document.createElement("tr");
+        var td1 = document.createElement("td");
+        var td2 = document.createElement("td");
+        var td3 = document.createElement("td"); 
+
+        td1.innerHTML = elements[i];
+        td2.innerHTML  = elements[++i];
+        td3.innerHTML  = elements[++i];
+
+        row.appendChild(td1);
+        row.appendChild(td2);
+        row.appendChild(td3);
+
+        table.children[0].appendChild(row);
+      }
+    }  
+
+    function newBug() {
 
     var table = document.getElementById("myTable");
     var row = document.createElement("tr");
@@ -13,8 +43,14 @@
     var td3 = document.createElement("td");    
 
     td1.innerHTML = document.getElementById("titleInput").value;
+    elements.push(document.getElementById("titleInput").value);
+    localStorage.setItem("elements", JSON.stringify(elements));
     td2.innerHTML  = document.getElementById("descInput").value;
+    elements.push(document.getElementById("descInput").value);
+    localStorage.setItem("elements", JSON.stringify(elements));
     td3.innerHTML  = document.getElementById("priorityInput").value;
+    elements.push(document.getElementById("priorityInput").value);
+    localStorage.setItem("elements", JSON.stringify(elements));
 
     row.appendChild(td1);
     row.appendChild(td2);
@@ -22,6 +58,8 @@
 
     table.children[0].appendChild(row);
 }
+
+
   
     </script>
 </head>
