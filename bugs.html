@@ -21,14 +21,17 @@
         var td1 = document.createElement("td");
         var td2 = document.createElement("td");
         var td3 = document.createElement("td"); 
+        var td4 = document.createElement("td"); 
 
         td1.innerHTML = elements[i];
-        td2.innerHTML  = elements[++i];
-        td3.innerHTML  = elements[++i];
+        td2.innerHTML = elements[++i];
+        td3.innerHTML = elements[++i];
+        td4.innerHTML = "x";
 
         row.appendChild(td1);
         row.appendChild(td2);
         row.appendChild(td3);
+        row.appendChild(td4);
 
         table.children[0].appendChild(row);
       }
@@ -40,7 +43,8 @@
     var row = document.createElement("tr");
     var td1 = document.createElement("td");
     var td2 = document.createElement("td");
-    var td3 = document.createElement("td");    
+    var td3 = document.createElement("td");
+    var td4 = document.createElement("td");    
 
     td1.innerHTML = document.getElementById("titleInput").value;
     elements.push(document.getElementById("titleInput").value);
@@ -51,12 +55,15 @@
     td3.innerHTML  = document.getElementById("priorityInput").value;
     elements.push(document.getElementById("priorityInput").value);
     localStorage.setItem("elements", JSON.stringify(elements));
+    td4.innerHTML = "x";
 
     row.appendChild(td1);
     row.appendChild(td2);
     row.appendChild(td3);
+    row.appendChild(td4);
 
     table.children[0].appendChild(row);
+    console.log(table.children[0].appendChild(row));
 }
 
 
