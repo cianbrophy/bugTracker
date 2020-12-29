@@ -5,6 +5,7 @@
     <title>Java Bug Tracker ++ Bugs</title>
      <script>
        var developer = [];
+       var boxNums = 0;
 
 window.onload = function() {
     if(JSON.parse(localStorage.getItem("developer")) != null) {
@@ -24,7 +25,8 @@ for(var i = 0; i < developer.length; i++) {
 
   td1.innerHTML = developer[i];
   td2.innerHTML  = developer[++i];
-  td3.innerHTML = '<button> x </button>';
+  td3.innerHTML = "<button onclick= del(" + boxNums + ")> x </button>";
+  boxNums+=1;
 
   row.appendChild(td1);
   row.appendChild(td2);
@@ -34,27 +36,26 @@ for(var i = 0; i < developer.length; i++) {
   }
 }
 
-      function newDev() {
+function del(index) {
+      console.log(index);
+      developer.splice((index * 2), 2);
+      if (localStorage.getItem("developer") == null) {
+        localStorage.setItem("developer", JSON.stringify(developer));
+      } else {
+        localStorage.setItem("developer", JSON.stringify(developer));
+      }
+      location.reload();
+      display();
+    }
 
-    var table = document.getElementById("myTable");
-    var row = document.createElement("tr");
-    var td1 = document.createElement("td");
-    var td2 = document.createElement("td");
-    var td3 = document.createElement("td");
+    function newDev() {
 
-    td1.innerHTML = document.getElementById("fName").value;
     developer.push(document.getElementById("fName").value);
     localStorage.setItem("developer", JSON.stringify(developer));
-    td2.innerHTML  = document.getElementById("sName").value;
     developer.push(document.getElementById("sName").value);
     localStorage.setItem("developer", JSON.stringify(developer));
-    td3.innerHTML = '<button> x </button>';
-    
-    row.appendChild(td1);
-    row.appendChild(td2);
-    row.appendChild(td3);
-
-    table.children[0].appendChild(row);
+    location.reload();
+    display();
 }
   
     </script>
