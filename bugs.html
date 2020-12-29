@@ -5,6 +5,7 @@
     <title>Java Bug Tracker ++ Bugs</title>
     <script>
       var elements = [];
+      var boxNum = 0;
 
       window.onload = function() {
           if(JSON.parse(localStorage.getItem("elements")) != null) {
@@ -15,6 +16,7 @@
       }
 
     function display() {
+      console.log(elements);
       for(var i = 0; i < elements.length; i++) {
         var table = document.getElementById("myTable");
         var row = document.createElement("tr");
@@ -26,7 +28,8 @@
         td1.innerHTML = elements[i];
         td2.innerHTML = elements[++i];
         td3.innerHTML = elements[++i];
-         td4.innerHTML = '<button> x </button>';
+        td4.innerHTML = "<button onclick= del(" + boxNum + ")> x </button>";
+        boxNum+=1;
 
         row.appendChild(td1);
         row.appendChild(td2);
@@ -37,33 +40,27 @@
       }
     }  
 
+    function del(index) {
+      window.localStorage.clear();
+      console.log(index);
+      elements.splice((index * 3), (index * 3) + 2);
+      if (localStorage.getItem("elements") == null) {
+        localStorage.setItem("elements", JSON.stringify(elements));
+      } else {
+        localStorage.setItem("elements", JSON.stringify(elements));
+      }
+      display();
+    }
+
     function newBug() {
 
-    var table = document.getElementById("myTable");
-    var row = document.createElement("tr");
-    var td1 = document.createElement("td");
-    var td2 = document.createElement("td");
-    var td3 = document.createElement("td");
-    var td4 = document.createElement("td");    
-
-    td1.innerHTML = document.getElementById("titleInput").value;
     elements.push(document.getElementById("titleInput").value);
     localStorage.setItem("elements", JSON.stringify(elements));
-    td2.innerHTML  = document.getElementById("descInput").value;
     elements.push(document.getElementById("descInput").value);
     localStorage.setItem("elements", JSON.stringify(elements));
-    td3.innerHTML  = document.getElementById("priorityInput").value;
     elements.push(document.getElementById("priorityInput").value);
     localStorage.setItem("elements", JSON.stringify(elements));
-    td4.innerHTML = '<button> x </button>';
-
-    row.appendChild(td1);
-    row.appendChild(td2);
-    row.appendChild(td3);
-    row.appendChild(td4);
-
-    table.children[0].appendChild(row);
-    console.log(table.children[0].appendChild(row));
+    display();
 }
 
 
