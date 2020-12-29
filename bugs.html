@@ -41,14 +41,14 @@
     }  
 
     function del(index) {
-      window.localStorage.clear();
       console.log(index);
-      elements.splice((index * 3), (index * 3) + 2);
+      elements.splice((index * 3), 3);
       if (localStorage.getItem("elements") == null) {
         localStorage.setItem("elements", JSON.stringify(elements));
       } else {
         localStorage.setItem("elements", JSON.stringify(elements));
       }
+      location.reload();
       display();
     }
 
@@ -60,6 +60,7 @@
     localStorage.setItem("elements", JSON.stringify(elements));
     elements.push(document.getElementById("priorityInput").value);
     localStorage.setItem("elements", JSON.stringify(elements));
+    location.reload();
     display();
 }
 
