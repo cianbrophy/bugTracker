@@ -32,7 +32,7 @@ body {
 	color:green;
 }
 
-.typewriter h1 {
+.typewriter {
 	padding:15px;
   overflow: hidden; 
   white-space: nowrap;
