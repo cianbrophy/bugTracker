@@ -1,0 +1,151 @@
+<!DOCTYPE html>
+<html lang ="en">
+<head>
+    <link href="../public/css/main.css" rel="stylesheet" type="text/css" />
+    <title>Java Bug Tracker ++ Bugs</title>
+    <script>
+      var elements = [];
+      var boxNum = 0;
+
+      window.onload = function() {
+          if(JSON.parse(localStorage.getItem("elements")) != null) {
+            elements = JSON.parse(localStorage.getItem("elements"));
+            console.log(elements);
+            display();
+          }
+      }
+
+    function display() {
+      console.log(elements);
+      for(var i = 0; i < elements.length; i++) {
+        var table = document.getElementById("myTable");
+        var row = document.createElement("tr");
+        var td1 = document.createElement("td");
+        var td2 = document.createElement("td");
+        var td3 = document.createElement("td"); 
+        var td4 = document.createElement("td"); 
+
+        td1.innerHTML = elements[i];
+        td2.innerHTML = elements[++i];
+        td3.innerHTML = elements[++i];
+        td4.innerHTML = "<button class = 'xbutton' onclick= del(" + boxNum + ") > X </button>";
+        boxNum+=1;
+
+        row.appendChild(td1);
+        row.appendChild(td2);
+        row.appendChild(td3);
+        row.appendChild(td4);
+
+        table.children[0].appendChild(row);
+      }
+    }  
+
+    function del(index) {
+      console.log(index);
+      elements.splice((index * 3), 3);
+      if (localStorage.getItem("elements") == null) {
+        localStorage.setItem("elements", JSON.stringify(elements));
+      } else {
+        localStorage.setItem("elements", JSON.stringify(elements));
+      }
+      location.reload();
+      display();
+    }
+
+    function newBug() {
+
+    elements.push(document.getElementById("titleInput").value);
+    localStorage.setItem("elements", JSON.stringify(elements));
+    elements.push(document.getElementById("descInput").value);
+    localStorage.setItem("elements", JSON.stringify(elements));
+    elements.push(document.getElementById("priorityInput").value);
+    localStorage.setItem("elements", JSON.stringify(elements));
+    location.reload();
+    display();
+}
+
+
+  
+    </script>
+</head>
+<body>
+    <nav class="navbar">
+    <ul class ="navbar-nav">
+      <li class="nav-item">
+        <a href="views/index.ejs" class="nav-link">
+          <svg aria-hidden="true" 
+          focusable="false" 
+          data-prefix="fas" 
+          data-icon="home" 
+          class="svg-inline--fa fa-home fa-w-18" 
+          role="img" 
+          xmlns="http://www.w3.org/2000/svg" 
+          viewBox="0 0 576 512">
+            <path fill="currentColor" 
+            d="M280.37 148.26L96 300.11V464a16 16 0 0 0 16 16l112.06-.29a16 16 0 0 0 15.92-16V368a16 16 0 0 1 16-16h64a16 16 0 0 1 16 16v95.64a16 16 0 0 0 16 16.05L464 480a16 16 0 0 0 16-16V300L295.67 148.26a12.19 12.19 0 0 0-15.3 0zM571.6 251.47L488 182.56V44.05a12 12 0 0 0-12-12h-56a12 12 0 0 0-12 12v72.61L318.47 43a48 48 0 0 0-61 0L4.34 251.47a12 12 0 0 0-1.6 16.9l25.5 31A12 12 0 0 0 45.15 301l235.22-193.74a12.19 12.19 0 0 1 15.3 0L530.9 301a12 12 0 0 0 16.9-1.6l25.5-31a12 12 0 0 0-1.7-16.93z"></path></svg>
+          <span class="link-text">Home</span>
+        </a>
+      </li>
+      <li class = "nav-item">
+        <a href = "bugs.html" class ="nav-link">
+          <svg aria-hidden="true" focusable="false" data-prefix="fas" data-icon="bug" class="svg-inline--fa fa-bug fa-w-16" role="img" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 512 512"><path fill="currentColor" d="M511.988 288.9c-.478 17.43-15.217 31.1-32.653 31.1H424v16c0 21.864-4.882 42.584-13.6 61.145l60.228 60.228c12.496 12.497 12.496 32.758 0 45.255-12.498 12.497-32.759 12.496-45.256 0l-54.736-54.736C345.886 467.965 314.351 480 280 480V236c0-6.627-5.373-12-12-12h-24c-6.627 0-12 5.373-12 12v244c-34.351 0-65.886-12.035-90.636-32.108l-54.736 54.736c-12.498 12.497-32.759 12.496-45.256 0-12.496-12.497-12.496-32.758 0-45.255l60.228-60.228C92.882 378.584 88 357.864 88 336v-16H32.666C15.23 320 .491 306.33.013 288.9-.484 270.816 14.028 256 32 256h56v-58.745l-46.628-46.628c-12.496-12.497-12.496-32.758 0-45.255 12.498-12.497 32.758-12.497 45.256 0L141.255 160h229.489l54.627-54.627c12.498-12.497 32.758-12.497 45.256 0 12.496 12.497 12.496 32.758 0 45.255L424 197.255V256h56c17.972 0 32.484 14.816 31.988 32.9zM257 0c-61.856 0-112 50.144-112 112h224C369 50.144 318.856 0 257 0z"></path></svg>
+          <span class = "link-text">Bugs</span></a>
+      </li>
+      <li class = "nav-item">
+        <a href = "devs.html" class ="nav-link">
+          <svg aria-hidden="true" focusable="false" data-prefix="fas" data-icon="user-friends" class="svg-inline--fa fa-user-friends fa-w-20" role="img" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 640 512"><path fill="currentColor" d="M192 256c61.9 0 112-50.1 112-112S253.9 32 192 32 80 82.1 80 144s50.1 112 112 112zm76.8 32h-8.3c-20.8 10-43.9 16-68.5 16s-47.6-6-68.5-16h-8.3C51.6 288 0 339.6 0 403.2V432c0 26.5 21.5 48 48 48h288c26.5 0 48-21.5 48-48v-28.8c0-63.6-51.6-115.2-115.2-115.2zM480 256c53 0 96-43 96-96s-43-96-96-96-96 43-96 96 43 96 96 96zm48 32h-3.8c-13.9 4.8-28.6 8-44.2 8s-30.3-3.2-44.2-8H432c-20.4 0-39.2 5.9-55.7 15.4 24.4 26.3 39.7 61.2 39.7 99.8v38.4c0 2.2-.5 4.3-.6 6.4H592c26.5 0 48-21.5 48-48 0-61.9-50.1-112-112-112z"></path></svg>
+          <span class = "link-text">Developers</span></a>
+      </li>
+</ul>
+</nav>
+<main>
+        <div class="column">
+          <h4>Bugs</h4>
+          <div class="background">
+              <table class="tablez" id = "myTable">
+                <thead>
+                  <tr>
+                    <th>Name</th>
+                    <th>Description</th>
+                    <th>Priority</th>
+                   </tr>
+                </thead> 
+              </table>
+          </div>
+        </div>
+        
+        <div class="formColumn">
+          <h4>Bug Report Form</h4>
+          <div class="background">
+          <form name="bugForm">
+                <div class="space">
+                  <label>Name</label>
+                  <input name="title" id = "titleInput" type="text">
+                </div>
+              
+                <div class="space">
+                  <label>Description</label>
+                  <input name="desciption" id = "descInput" type="text">
+                </div>
+                
+                <div class="space">
+                  <label>Priority</label>
+                  <select id = "priorityInput">
+                    <option>Very High</option>
+                    <option>High</option>
+                    <option>Medium</option>
+                    <option>Low</option>
+                    <option>Very Low</option>
+                  </select>
+                </div>
+
+                <div class="space">
+                    <button type ="button" onclick = "newBug()" class ="submit">Submit Bug</button>
+                </div>
+          </form>
+          </div>
+          <footer>Bug Tracker Inc. 2021</footer>
+        </div>
+      </main>
+</body>
+</html>
