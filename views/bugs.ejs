@@ -5,18 +5,22 @@
     <title>Java Bug Tracker ++ Bugs</title>
     <script>
       var elements = [];
-      var boxNum = 0;
+      "<%for(var i = 0; i < element.length; i++) { console.log(element[i])}; %>";
+      var beforeElements = "<%= element %>";
 
-      window.onload = function() {
-          if(JSON.parse(localStorage.getItem("elements")) != null) {
-            elements = JSON.parse(localStorage.getItem("elements"));
-            console.log(elements);
-            display();
-          }
+      elements = beforeElements.split(',');
+
+      var boxNum = 0;
+      window.onload = function() {   
+        console.log(elements);
+        display();
       }
 
     function display() {
       console.log(elements);
+      var j = 0;
+      if(elements.length < 3)
+        return;
       for(var i = 0; i < elements.length; i++) {
         var table = document.getElementById("myTable");
         var row = document.createElement("tr");
@@ -24,7 +28,7 @@
         var td2 = document.createElement("td");
         var td3 = document.createElement("td"); 
         var td4 = document.createElement("td"); 
-
+        
         td1.innerHTML = elements[i];
         td2.innerHTML = elements[++i];
         td3.innerHTML = elements[++i];
@@ -51,20 +55,6 @@
       location.reload();
       display();
     }
-
-    function newBug() {
-
-    elements.push(document.getElementById("titleInput").value);
-    localStorage.setItem("elements", JSON.stringify(elements));
-    elements.push(document.getElementById("descInput").value);
-    localStorage.setItem("elements", JSON.stringify(elements));
-    elements.push(document.getElementById("priorityInput").value);
-    localStorage.setItem("elements", JSON.stringify(elements));
-    location.reload();
-    display();
-}
-
-
   
     </script>
 </head>
@@ -117,7 +107,7 @@
         <div class="formColumn">
           <h4>Bug Report Form</h4>
           <div class="background">
-          <form name="bugForm">
+          <form name="bugForm" action="/newBug" method="POST">
                 <div class="space">
                   <label>Name</label>
                   <input name="title" id = "titleInput" type="text">
@@ -125,12 +115,12 @@
               
                 <div class="space">
                   <label>Description</label>
-                  <input name="desciption" id = "descInput" type="text">
+                  <input name="description" id = "descInput" type="text">
                 </div>
                 
                 <div class="space">
                   <label>Priority</label>
-                  <select id = "priorityInput">
+                  <select name="priorityInput" id = "priorityInput">
                     <option>Very High</option>
                     <option>High</option>
                     <option>Medium</option>
@@ -140,7 +130,7 @@
                 </div>
 
                 <div class="space">
-                    <button type ="button" onclick = "newBug()" class ="submit">Submit Bug</button>
+                    <button type ="submit" class ="submit">Submit Bug</button>
                 </div>
           </form>
           </div>
