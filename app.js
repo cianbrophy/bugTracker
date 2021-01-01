@@ -11,6 +11,7 @@ app.use('/public', express.static('public'));
 
 app.use("/", routes);
 app.use("/bugs", bugs);
+app.use("/devs", bugs);
 
 app.get("/", function(req, res) {
     res.render("index.ejs");
