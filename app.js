@@ -1,12 +1,20 @@
 var express = require("express");
 var app = express();
 var bodyParser = require("body-parser");
+var mongoose = require("mongoose");
+
+mongoose.connect("mongodb://localhost/bug");
 
 var routes = require('./routes/index');
-var bugs = require('./routes/bugs');
 var devs = require('./routes/devs');
 
-var element = [];
+var bugSchema = new mongoose.Schema({
+    name: String,
+    description: String,
+    priority: String
+});
+
+var Bug = mongoose.model("Bug", bugSchema);
 
 app.set("view engine", "ejs");
 app.use(bodyParser.urlencoded({extended: true}));
@@ -14,7 +22,13 @@ app.use(bodyParser.urlencoded({extended: true}));
 app.use('/public', express.static('public'));
 
 app.get('/bugs', function (req, res) {
-    res.render('bugs', {element, element});
+    Bug.find({}, function(err, element) {
+        if(err)
+            console.log("hello");
+        else {
+            res.render('bugs', {element, element});
+        }
+    })
 });
 
 app.use("/", routes);

@@ -4,24 +4,26 @@
     <link href="../public/css/main.css" rel="stylesheet" type="text/css" />
     <title>Java Bug Tracker ++ Bugs</title>
     <script>
-      var elements = [];
-      "<%for(var i = 0; i < element.length; i++) { console.log(element[i])}; %>";
-      var beforeElements = "<%= element %>";
-
-      elements = beforeElements.split(',');
+      var names = [];
+      var descriptions = [];
+      var prioritys = [];
+      "<% for(var i = 0; i < element.length; i++) { %>";
+        names.push("<%= element[i].name %>");
+        descriptions.push("<%= element[i].description %>");
+        prioritys.push("<%= element[i].priority %>");
+      "<% } %>"
+      console.log(names);
+      console.log(descriptions);
+      console.log(prioritys);
 
       var boxNum = 0;
-      window.onload = function() {   
-        console.log(elements);
+      window.onload = function() {
         display();
       }
 
     function display() {
-      console.log(elements);
       var j = 0;
-      if(elements.length < 3)
-        return;
-      for(var i = 0; i < elements.length; i++) {
+      for(var i = 0; i < names.length; i++) {
         var table = document.getElementById("myTable");
         var row = document.createElement("tr");
         var td1 = document.createElement("td");
@@ -29,9 +31,9 @@
         var td3 = document.createElement("td"); 
         var td4 = document.createElement("td"); 
         
-        td1.innerHTML = elements[i];
-        td2.innerHTML = elements[++i];
-        td3.innerHTML = elements[++i];
+        td1.innerHTML = names[i];
+        td2.innerHTML = descriptions[i];
+        td3.innerHTML = prioritys[i];
         td4.innerHTML = "<button class = 'xbutton' onclick= del(" + boxNum + ") > X </button>";
         boxNum+=1;
 
@@ -47,12 +49,6 @@
     function del(index) {
       console.log(index);
       elements.splice((index * 3), 3);
-      if (localStorage.getItem("elements") == null) {
-        localStorage.setItem("elements", JSON.stringify(elements));
-      } else {
-        localStorage.setItem("elements", JSON.stringify(elements));
-      }
-      location.reload();
       display();
     }
   
