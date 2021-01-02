@@ -46,6 +46,10 @@ body::-webkit-scrollbar-thumb {
   align-items:center;
 }
 
+.nav-item {
+  width:100%;
+}
+
 
 .nav-link {
   display:flex;
