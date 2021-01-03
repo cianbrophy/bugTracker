@@ -4,10 +4,12 @@
     <link href="../public/css/main.css" rel="stylesheet" type="text/css" />
     <title>Java Bug Tracker ++ Bugs</title>
     <script>
+      var ids = [];
       var names = [];
       var descriptions = [];
       var prioritys = [];
       "<% for(var i = 0; i < element.length; i++) { %>";
+        ids.push("<%= element[i]._id %>");
         names.push("<%= element[i].name %>");
         descriptions.push("<%= element[i].description %>");
         prioritys.push("<%= element[i].priority %>");
@@ -34,7 +36,7 @@
         td1.innerHTML = names[i];
         td2.innerHTML = descriptions[i];
         td3.innerHTML = prioritys[i];
-        td4.innerHTML = "<button class = 'xbutton' onclick= del(" + boxNum + ") > X </button>";
+        td4.innerHTML = "<form action='/deleteBug' method='POST'> <input type='submit' name='id'  class = 'xbutton' value=" + ids[i] + " /> X </button> </form>";
         boxNum+=1;
 
         row.appendChild(td1);
@@ -44,13 +46,7 @@
 
         table.children[0].appendChild(row);
       }
-    }  
-
-    function del(index) {
-      console.log(index);
-      elements.splice((index * 3), 3);
-      display();
-    }
+    };
   
     </script>
 </head>

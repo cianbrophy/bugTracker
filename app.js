@@ -2,6 +2,7 @@ var express = require("express");
 var app = express();
 var bodyParser = require("body-parser");
 var mongoose = require("mongoose");
+var mongodb = require('mongodb');
 
 mongoose.connect("mongodb://localhost/bug", {useNewUrlParser: true, useUnifiedTopology: true}, (err) => {
     if (err)
@@ -38,6 +39,20 @@ app.get('/bugs', function (req, res) {
 
 app.use("/", routes);
 app.use("/devs", devs);
+
+app.post("/deleteBug", function(req, res) {
+    console.log("Delete Sent!");
+
+    Bug.deleteOne({_id: new mongodb.ObjectID(req.body.id)}, function(err, results) {
+        if (err){
+            console.log("failed");
+            throw err;
+          }
+          console.log("success");
+       });
+
+    res.redirect("/bugs");
+});
 
 app.post("/newBug", function(req, res) {
     console.log("Request Sent!");
