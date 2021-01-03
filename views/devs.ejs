@@ -2,30 +2,37 @@
 <html lang ="en">
 <head>
     <link href="../public/css/main.css" rel="stylesheet" type="text/css" />
-    <title>Java Bug Tracker ++ Bugs</title>
+    <title>Java Bug Tracker ++ Devs</title>
      <script>
-       var developer = [];
+        var ids = [];
+      var firstnames = [];
+      var secondnames = [];
+      "<% for(var i = 0; i < element.length; i++) { %>";
+        ids.push("<%= element[i]._id %>");
+        names.push("<%= element[i].firstname %>");
+        descriptions.push("<%= element[i].secondname %>");
+      "<% } %>"
+      console.log(firstnames);
+      console.log(secondnames);
+     
+
        var boxNums = 0;
 
 window.onload = function() {
-    if(JSON.parse(localStorage.getItem("developer")) != null) {
-      developer = JSON.parse(localStorage.getItem("developer"));
-      console.log(developer);
       display();
     }
-}
 
 function display() {
-for(var i = 0; i < developer.length; i++) {
+for(var i = 0; i < firstname.length; i++) {
   var table = document.getElementById("myTable");
   var row = document.createElement("tr");
   var td1 = document.createElement("td");
   var td2 = document.createElement("td"); 
   var td3 = document.createElement("td");
 
-  td1.innerHTML = developer[i];
-  td2.innerHTML  = developer[++i];
-  td3.innerHTML = "<button class = 'xbutton' onclick= del(" + boxNums + ")> x </button>";
+  td1.innerHTML = firstnames[i];
+  td2.innerHTML  = secondnames[i];
+  td3.innerHTML = "<form action='/deleteDev' method='POST'> <input type='submit' name='id'  class = 'xbutton' value=" + ids[i] + " /> X </button> </form>";
   boxNums+=1;
 
   row.appendChild(td1);
@@ -36,27 +43,6 @@ for(var i = 0; i < developer.length; i++) {
   }
 }
 
-function del(index) {
-      console.log(index);
-      developer.splice((index * 2), 2);
-      if (localStorage.getItem("developer") == null) {
-        localStorage.setItem("developer", JSON.stringify(developer));
-      } else {
-        localStorage.setItem("developer", JSON.stringify(developer));
-      }
-      location.reload();
-      display();
-    }
-
-    function newDev() {
-
-    developer.push(document.getElementById("fName").value);
-    localStorage.setItem("developer", JSON.stringify(developer));
-    developer.push(document.getElementById("sName").value);
-    localStorage.setItem("developer", JSON.stringify(developer));
-    location.reload();
-    display();
-}
   
     </script>
 </head>
@@ -108,19 +94,19 @@ function del(index) {
         <div class="formColumn">
           <h4>Developers Form</h4>
           <div class="background">
-          <form name="bugForm">
+          <form name="devForm" action = "/newDev" method = "POST">
                 <div class="space">
                   <label>First Name</label>
-                  <input name="title" id = "fName" type="text">
+                  <input name="firstname" id = "fName" type="text">
                 </div>
               
                 <div class="space">
                   <label>Second Name</label>
-                  <input name="desciption" id = "sName" type="text">
+                  <input name="secondname" id = "sName" type="text">
                 </div>
                 
                 <div class="space">
-                    <button type ="button" onclick = "newDev()" class ="submit">Add Developer</button>
+                    <button type ="button" class ="submit">Add Developer</button>
                 </div>
           </form>
           <footer>Bug Tracker Inc. 2021</footer>
