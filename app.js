@@ -3,7 +3,12 @@ var app = express();
 var bodyParser = require("body-parser");
 var mongoose = require("mongoose");
 
-mongoose.connect("mongodb://localhost/bug");
+mongoose.connect("mongodb://localhost/bug", {useNewUrlParser: true, useUnifiedTopology: true}, (err) => {
+    if (err)
+     console.error(err);
+  else
+     console.log("Connected to the mongodb"); 
+});
 
 var routes = require('./routes/index');
 var devs = require('./routes/devs');
@@ -36,15 +41,21 @@ app.use("/devs", devs);
 
 app.post("/newBug", function(req, res) {
     console.log("Request Sent!");
-    var name = req.body.title;
-    var description = req.body.description;
-    var priority = req.body.priorityInput;
-    element.push(name);
-    element.push(description);
-    element.push(priority);
-    console.log(element);
+    var newBug = new Bug({
+        name: req.body.title,
+        description: req.body.description,
+        priority: req.body.priorityInput
+    });
+
+    Bug.create(newBug, function(err, Bug) {
+        if(err)
+            console.log(err);
+        else
+            console.log("Inserted Bug " + newBug);
+    })
+
     res.redirect("/bugs");
-})
+});
 
 app.listen(3000, function() {
     console.log("Server started from port 3000");
