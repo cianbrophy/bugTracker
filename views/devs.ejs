@@ -9,8 +9,8 @@
       var secondnames = [];
       "<% for(var i = 0; i < element.length; i++) { %>";
         ids.push("<%= element[i]._id %>");
-        names.push("<%= element[i].firstname %>");
-        descriptions.push("<%= element[i].secondname %>");
+        firstnames.push("<%= element[i].firstname %>");
+        secondnames.push("<%= element[i].secondname %>");
       "<% } %>"
       console.log(firstnames);
       console.log(secondnames);
@@ -23,7 +23,7 @@ window.onload = function() {
     }
 
 function display() {
-for(var i = 0; i < firstname.length; i++) {
+for(var i = 0; i < firstnames.length; i++) {
   var table = document.getElementById("myTable");
   var row = document.createElement("tr");
   var td1 = document.createElement("td");
@@ -41,7 +41,7 @@ for(var i = 0; i < firstname.length; i++) {
 
   table.children[0].appendChild(row);
   }
-}
+};
 
   
     </script>
@@ -106,7 +106,7 @@ for(var i = 0; i < firstname.length; i++) {
                 </div>
                 
                 <div class="space">
-                    <button type ="button" class ="submit">Add Developer</button>
+                    <button type ="submit" class ="submit">Add Developer</button>
                 </div>
           </form>
           <footer>Bug Tracker Inc. 2021</footer>

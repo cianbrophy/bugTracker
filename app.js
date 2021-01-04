@@ -4,7 +4,7 @@ var bodyParser = require("body-parser");
 var mongoose = require("mongoose");
 var mongodb = require('mongodb');
 
-mongoose.connect("mongodb://localhost/dev", {useNewUrlParser: true, useUnifiedTopology: true}, (err) => {
+mongoose.connect("mongodb://localhost/bug", {useNewUrlParser: true, useUnifiedTopology: true}, (err) => {
     if (err)
      console.error(err);
   else
@@ -97,11 +97,11 @@ app.post("/newDev", function(req, res) {
         secondname: req.body.secondname
     });
 
-    Bug.create(newDev, function(err, Dev) {
+    Dev.create(newDev, function(err, Dev) {
         if(err)
             console.log(err);
         else
-            console.log("Inserted Bug " + newDev);
+            console.log("Inserted Dev " + newDev);
     })
 
     res.redirect("/devs");
