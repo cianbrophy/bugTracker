@@ -3,8 +3,9 @@ var app = express();
 var bodyParser = require("body-parser");
 var mongoose = require("mongoose");
 var mongodb = require('mongodb');
+var PORT = process.env.PORT || 3000;
 
-mongoose.connect("mongodb://user:pass@localhost/bug", {useNewUrlParser: true, useUnifiedTopology: true}, (err) => {
+mongoose.connect("mongodb+srv://CameronKenny:Kirkman1@cluster0.gw2st.mongodb.net/bug?retryWrites=true&w=majority", {useNewUrlParser: true, useUnifiedTopology: true}, (err) => {
     if (err)
      console.error(err);
   else
@@ -122,6 +123,6 @@ app.post("/deleteDev", function(req, res) {
 });
 
 
-app.listen(3000, function() {
+app.listen(PORT, function() {
     console.log("Server started from port 3000");
 });
