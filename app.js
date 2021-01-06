@@ -4,7 +4,7 @@ var bodyParser = require("body-parser");
 var mongoose = require("mongoose");
 var mongodb = require('mongodb');
 
-mongoose.connect("mongodb://localhost/bug", {useNewUrlParser: true, useUnifiedTopology: true}, (err) => {
+mongoose.connect("mongodb://user:pass@localhost/bug", {useNewUrlParser: true, useUnifiedTopology: true}, (err) => {
     if (err)
      console.error(err);
   else
