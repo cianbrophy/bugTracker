@@ -209,4 +209,9 @@ input[type=text] {
 	height: 30px;
 }
 
+.loginColumn {
+  width: 30%;
+  float:left;
+}
+
 
