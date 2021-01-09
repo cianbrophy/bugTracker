@@ -27,9 +27,16 @@ var devSchema = new mongoose.Schema({
     secondname: String
 });
 
+var loginSchema = new mongoose.Schema({
+    username: String,
+    password: String
+});
+
 var Bug = mongoose.model("Bug", bugSchema);
 
 var Dev = mongoose.model("Dev", devSchema);
+
+var Login = mongoose.model("Login", loginSchema);
 
 app.set("view engine", "ejs");
 app.use(bodyParser.urlencoded({extended: true}));
@@ -130,6 +137,28 @@ app.post("/deleteDev", function(req, res) {
        });
 
     res.redirect("/devs");
+});
+
+var admin = new Login({
+    username: "admin",
+    password: "password"
+})
+
+app.post("/newLogin", function(req, res) {
+    console.log("Attempting Login");
+    var newLogin = new Login({
+        username: req.body.user,
+        password: req.body.pass,
+    });
+
+    if(newLogin != admin) {
+        console.log("Incorrect username/password, please try again");
+    }
+    else {
+        console.log("Login successful!");
+    }
+
+    res.redirect("/login");
 });
 
 

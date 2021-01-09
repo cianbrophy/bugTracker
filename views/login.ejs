@@ -3,6 +3,27 @@
 <head>
 <link href="../public/css/main.css" rel="stylesheet" type="text/css" />
 <title> Java Bug Tracker ++ Login </title>
+<script>
+ var ids =[];
+ var usernames = [];
+ var passwords = [];
+"<% for(var i = 0; i < element.length; i++) { %>";
+        ids.push("<%= element[i]._id %>");
+        usernames.push("<%= element[i].username %>");
+        passwords.push("<%= element[i].password %>");
+      "<% } %>"
+      console.log(usernames);
+      console.log(passwords);
+
+      window.onload = function() {
+        display();
+      }
+
+      function display {
+
+      }
+
+  </script>
 </head>
 <body>
 	<nav class="navbar">
@@ -43,11 +64,11 @@
 <h4>Login</h4>
 <div class ="loginColumn">
 <div class="background">
-  <form action="/newLogin" method="POST">
+  <form name = "loginForm" action="/newLogin" method="POST">
     <label>Username:</label>   
-            <input type="text" placeholder="Enter Username" name="username" required>  
+            <input type="text" id = "user" placeholder="Enter Username" name="username" required>  
             <label>Password:</label>   
-            <input type="text" placeholder="Enter Password" name="password" required>  
+            <input type="text" id = "pass" placeholder="Enter Password" name="password" required>  
             <div class = "space">
             <button type="submit" class = "submit">Login</button>   
       </div>
