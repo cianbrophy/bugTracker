@@ -4,8 +4,8 @@ var bodyParser = require("body-parser");
 var mongoose = require("mongoose");
 var mongodb = require('mongodb');
 var PORT = process.env.PORT || 3000;
-var username = NormalUser
-var password = thisismypassword;
+var username = "NormalUser";
+var password = "thisismypassword";
 
 mongoose.connect("mongodb+srv://" + username + ":" + password + "@cluster0.gw2st.mongodb.net/bug?retryWrites=true&w=majority", {useNewUrlParser: true, useUnifiedTopology: true}, (err) => {
     if (err)
