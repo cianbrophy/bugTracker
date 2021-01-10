@@ -3,27 +3,6 @@
 <head>
 <link href="../public/css/main.css" rel="stylesheet" type="text/css" />
 <title> Java Bug Tracker ++ Login </title>
-<script>
- var ids =[];
- var usernames = [];
- var passwords = [];
-"<% for(var i = 0; i < element.length; i++) { %>";
-        ids.push("<%= element[i]._id %>");
-        usernames.push("<%= element[i].username %>");
-        passwords.push("<%= element[i].password %>");
-      "<% } %>"
-      console.log(usernames);
-      console.log(passwords);
-
-      window.onload = function() {
-        display();
-      }
-
-      function display {
-
-      }
-
-  </script>
 </head>
 <body>
 	<nav class="navbar">

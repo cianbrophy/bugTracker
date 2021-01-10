@@ -27,11 +27,6 @@ var devSchema = new mongoose.Schema({
     secondname: String
 });
 
-var loginSchema = new mongoose.Schema({
-    username: String,
-    password: String
-});
-
 var Bug = mongoose.model("Bug", bugSchema);
 
 var Dev = mongoose.model("Dev", devSchema);
@@ -138,11 +133,6 @@ app.post("/deleteDev", function(req, res) {
 
     res.redirect("/devs");
 });
-
-var admin = new Login({
-    username: "admin",
-    password: "password"
-})
 
 app.post("/newLogin", function(req, res) {
     console.log("Attempting Login");
