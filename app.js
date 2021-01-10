@@ -5,7 +5,7 @@ var mongoose = require("mongoose");
 var mongodb = require('mongodb');
 var PORT = process.env.PORT || 3000;
 
-mongoose.connect("mongodb+srv://CameronKenny:Kirkman1@cluster0.gw2st.mongodb.net/bug?retryWrites=true&w=majority", {useNewUrlParser: true, useUnifiedTopology: true}, (err) => {
+mongoose.connect("mongodb+srv://User:cameronandcian@cluster0.gw2st.mongodb.net/bug?retryWrites=true&w=majority", {useNewUrlParser: true, useUnifiedTopology: true}, (err) => {
     if (err)
      console.error(err);
   else
