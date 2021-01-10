@@ -4,16 +4,13 @@ var bodyParser = require("body-parser");
 var mongoose = require("mongoose");
 var mongodb = require('mongodb');
 var PORT = process.env.PORT || 3000;
-var username = "NormalUser";
-var password = "thisismypassword";
 
-mongoose.connect("mongodb+srv://" + username + ":" + password + "@cluster0.gw2st.mongodb.net/bug?retryWrites=true&w=majority", {useNewUrlParser: true, useUnifiedTopology: true}, (err) => {
+mongoose.connect("mongodb+srv://CameronKenny:Kirkman1@cluster0.gw2st.mongodb.net/bug?retryWrites=true&w=majority", {useNewUrlParser: true, useUnifiedTopology: true}, (err) => {
     if (err)
      console.error(err);
   else
      console.log("Connected to the mongodb"); 
 });
-
 
 var routes = require('./routes/index');
 var devs = require('./routes/devs');
