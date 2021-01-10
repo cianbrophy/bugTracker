@@ -3,17 +3,18 @@ var app = express();
 var bodyParser = require("body-parser");
 var mongoose = require("mongoose");
 var mongodb = require('mongodb');
-var PORT = process.env.PORT || 3000;
 
-mongoose.connect("mongodb+srv://User:cameronandcian@cluster0.gw2st.mongodb.net/bug?retryWrites=true&w=majority", {useNewUrlParser: true, useUnifiedTopology: true}, (err) => {
+mongoose.connect("mongodb+srv://User:cianandcameron@cluster0.gw2st.mongodb.net/bug?retryWrites=true&w=majority", {useNewUrlParser: true, useUnifiedTopology: true}, (err) => {
     if (err)
      console.error(err);
   else
      console.log("Connected to the mongodb"); 
 });
 
+
 var routes = require('./routes/index');
 var devs = require('./routes/devs');
+var login = require('./routes/login');
 
 var bugSchema = new mongoose.Schema({
     name: String,
@@ -38,7 +39,7 @@ app.use('/public', express.static('public'));
 app.get('/bugs', function (req, res) {
     Bug.find({}, function(err, element) {
         if(err)
-            console.log("Connected");
+            console.log("hello");
         else {
             res.render('bugs', {element, element});
         }
@@ -48,9 +49,19 @@ app.get('/bugs', function (req, res) {
 app.get('/devs', function (req, res) {
     Dev.find({}, function(err, element) {
         if(err)
-            console.log("Connected");
+            console.log("hello");
         else {
             res.render('devs', {element, element});
+        }
+    })
+});
+
+app.get('/login', function (req, res) {
+    Bug.find({}, function(err, element) {
+        if(err)
+            console.log("hello");
+        else {
+            res.render('login', {element, element});
         }
     })
 });
@@ -121,7 +132,24 @@ app.post("/deleteDev", function(req, res) {
     res.redirect("/devs");
 });
 
+app.post("/newLogin", function(req, res) {
+    console.log("Attempting Login");
+    var newLogin = new Login({
+        username: req.body.user,
+        password: req.body.pass,
+    });
 
-app.listen(PORT, function() {
+    if(newLogin != admin) {
+        console.log("Incorrect username/password, please try again");
+    }
+    else {
+        console.log("Login successful!");
+    }
+
+    res.redirect("/login");
+});
+
+
+app.listen(3000, function() {
     console.log("Server started from port 3000");
 });
