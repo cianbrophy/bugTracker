@@ -4,7 +4,7 @@ var bodyParser = require("body-parser");
 var mongoose = require("mongoose");
 var mongodb = require('mongodb');
 
-mongoose.connect("mongodb://localhost/bug", {useNewUrlParser: true, useUnifiedTopology: true}, (err) => {
+mongoose.connect("mongodb+srv://CianBrophy:w8IgEURgWVHq3t2H@cluster0.gw2st.mongodb.net/bug?retryWrites=true&w=majority", {useNewUrlParser: true, useUnifiedTopology: true}, (err) => {
     if (err)
      console.error(err);
   else
@@ -26,6 +26,11 @@ var devSchema = new mongoose.Schema({
     firstname: String,
     secondname: String
 });
+
+var loginSchema = new mongoose.Schema({
+        username: String,
+        password: String
+    });
 
 var Bug = mongoose.model("Bug", bugSchema);
 
@@ -138,7 +143,7 @@ app.post("/newLogin", function(req, res) {
     console.log("Attempting Login");
     var newLogin = new Login({
         username: req.body.user,
-        password: req.body.pass,
+        password: req.body.pass
     });
 
     if(newLogin != admin) {
