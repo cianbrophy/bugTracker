@@ -39,7 +39,7 @@ app.use('/public', express.static('public'));
 app.get('/bugs', function (req, res) {
     Bug.find({}, function(err, element) {
         if(err)
-            console.log("hello");
+            console.log("Connected");
         else {
             res.render('bugs', {element, element});
         }
@@ -49,7 +49,7 @@ app.get('/bugs', function (req, res) {
 app.get('/devs', function (req, res) {
     Dev.find({}, function(err, element) {
         if(err)
-            console.log("hello");
+            console.log("Connected");
         else {
             res.render('devs', {element, element});
         }
