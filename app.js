@@ -4,9 +4,9 @@ var bodyParser = require("body-parser");
 var mongoose = require("mongoose");
 var mongodb = require('mongodb');
 
-var conn1 = mongoose.createConnection('mongodb://localhost/bug');
-var conn2 = mongoose.createConnection('mongodb://localhost/dev');
-
+var conn1 = mongoose.createConnection('mongodb+srv://CianBrophy:w8IgEURgWVHq3t2H@cluster0.gw2st.mongodb.net/bug?retryWrites=true&w=majority');
+var conn2 = mongoose.createConnection('mongodb+srv://CianBrophy:w8IgEURgWVHq3t2H@cluster0.gw2st.mongodb.net/dev?retryWrites=true&w=majority');
+var conn3 = mongoose.createConnection('mongodb+srv://CianBrophy:w8IgEURgWVHq3t2H@cluster0.gw2st.mongodb.net/login?retryWrites=true&w=majority');
 
 var Bug  = conn1.model('Bug', new mongoose.Schema({
   name: String,
@@ -17,6 +17,11 @@ var Bug  = conn1.model('Bug', new mongoose.Schema({
 var Dev = conn2.model('Dev', new mongoose.Schema({
   firstname: String,
   secondname: String
+}));
+
+var Login = conn3.model('Login', new mongoose.Schema({
+  username: String,
+  password: String
 }));
 
 conn1.on('connected', () => {
@@ -32,15 +37,6 @@ var routes = require('./routes/index');
 var devs = require('./routes/devs');
 var login = require('./routes/login');
 
-
-var loginSchema = new mongoose.Schema({
-        username: String,
-        password: String
-    });
-
-
-
-var Login = mongoose.model("Login", loginSchema);
 
 app.set("view engine", "ejs");
 app.use(bodyParser.urlencoded({extended: true}));
@@ -148,6 +144,11 @@ app.post("/newLogin", function(req, res) {
     var newLogin = new Login({
         username: req.body.user,
         password: req.body.pass
+    });
+
+    var admin = new Login({
+        username: "admin",
+        password: "admin"
     });
 
     if(newLogin != admin) {
