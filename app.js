@@ -4,11 +4,27 @@ var bodyParser = require("body-parser");
 var mongoose = require("mongoose");
 var mongodb = require('mongodb');
 
-mongoose.connect("mongodb+srv://CianBrophy:w8IgEURgWVHq3t2H@cluster0.gw2st.mongodb.net/bug?retryWrites=true&w=majority", {useNewUrlParser: true, useUnifiedTopology: true}, (err) => {
-    if (err)
-     console.error(err);
-  else
-     console.log("Connected to the mongodb"); 
+var conn1 = mongoose.createConnection('mongodb://localhost/bug');
+var conn2 = mongoose.createConnection('mongodb://localhost/dev');
+
+
+var Bug  = conn1.model('Bug', new mongoose.Schema({
+  name: String,
+  description: String,
+  priority: String
+}));
+
+var Dev = conn2.model('Dev', new mongoose.Schema({
+  firstname: String,
+  secondname: String
+}));
+
+conn1.on('connected', () => {
+  console.log('connected to mongodb');
+});
+
+conn1.on('disconnected', () => {
+  console.log('connection disconnected');
 });
 
 
@@ -16,25 +32,13 @@ var routes = require('./routes/index');
 var devs = require('./routes/devs');
 var login = require('./routes/login');
 
-var bugSchema = new mongoose.Schema({
-    name: String,
-    description: String,
-    priority: String
-});
-
-var devSchema = new mongoose.Schema({
-    firstname: String,
-    secondname: String
-});
 
 var loginSchema = new mongoose.Schema({
         username: String,
         password: String
     });
 
-var Bug = mongoose.model("Bug", bugSchema);
 
-var Dev = mongoose.model("Dev", devSchema);
 
 var Login = mongoose.model("Login", loginSchema);
 
