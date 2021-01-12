@@ -5,6 +5,7 @@ var mongoose = require("mongoose");
 var mongodb = require('mongodb');
 var signIn = false;
 let alert = require('alert');
+var port = process.env.port || 3000;
 
 var conn1 = mongoose.createConnection('mongodb+srv://CianBrophy:w8IgEURgWVHq3t2H@cluster0.gw2st.mongodb.net/bug?retryWrites=true&w=majority', {useNewUrlParser: true, useUnifiedTopology: true});
 var conn2 = mongoose.createConnection('mongodb+srv://CianBrophy:w8IgEURgWVHq3t2H@cluster0.gw2st.mongodb.net/dev?retryWrites=true&w=majority', {useNewUrlParser: true, useUnifiedTopology: true});
@@ -177,6 +178,6 @@ app.post("/newLogin", function(req, res) {
 });
 
 
-app.listen(3000, function() {
+app.listen(port, function() {
     console.log("Server started from port 3000");
 });
