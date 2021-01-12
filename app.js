@@ -4,6 +4,7 @@ var bodyParser = require("body-parser");
 var mongoose = require("mongoose");
 var mongodb = require('mongodb');
 var signIn = false;
+let alert = require('alert');
 
 var conn1 = mongoose.createConnection('mongodb+srv://CianBrophy:w8IgEURgWVHq3t2H@cluster0.gw2st.mongodb.net/bug?retryWrites=true&w=majority', {useNewUrlParser: true, useUnifiedTopology: true});
 var conn2 = mongoose.createConnection('mongodb+srv://CianBrophy:w8IgEURgWVHq3t2H@cluster0.gw2st.mongodb.net/dev?retryWrites=true&w=majority', {useNewUrlParser: true, useUnifiedTopology: true});
@@ -79,16 +80,20 @@ app.use("/devs", devs);
 
 app.post("/deleteBug", function(req, res) {
     console.log("Delete Sent!");
-
+    if(signIn === false) {
+        console.log("Only admin delete bugs!")
+    } else {
     Bug.deleteOne({_id: new mongodb.ObjectID(req.body.id)}, function(err, results) {
         if (err){
             console.log("failed");
             throw err;
           }
+          alert("Bug Removed");
           console.log("success");
        });
 
     res.redirect("/bugs");
+}
 });
 
 app.post("/newBug", function(req, res) {
@@ -103,6 +108,7 @@ app.post("/newBug", function(req, res) {
         if(err)
             console.log(err);
         else
+            alert("Bug Added");
             console.log("Inserted Bug " + newBug);
     })
 
@@ -123,6 +129,7 @@ app.post("/newDev", function(req, res) {
             if(err)
                 console.log(err);
             else
+                alert("Dev Added");
                 console.log("Inserted Dev " + newDev);
         })
     }
@@ -142,6 +149,7 @@ app.post("/deleteDev", function(req, res) {
                 throw err;
             }
             console.log("success");
+            alert("Dev Removed");
         });
     }
 
@@ -157,9 +165,11 @@ app.post("/newLogin", function(req, res) {
         console.log("Incorrect username/password, please try again");
         console.log(username);
         console.log(password);
+        alert("Incorrect username/password, please try again");
     }
     else {
         console.log("Login successful!");
+        alert("You are now signed in");
         signIn = true;
     }
 
