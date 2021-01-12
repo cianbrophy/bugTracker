@@ -3,10 +3,11 @@ var app = express();
 var bodyParser = require("body-parser");
 var mongoose = require("mongoose");
 var mongodb = require('mongodb');
+var signIn = false;
 
-var conn1 = mongoose.createConnection('mongodb+srv://CianBrophy:w8IgEURgWVHq3t2H@cluster0.gw2st.mongodb.net/bug?retryWrites=true&w=majority');
-var conn2 = mongoose.createConnection('mongodb+srv://CianBrophy:w8IgEURgWVHq3t2H@cluster0.gw2st.mongodb.net/dev?retryWrites=true&w=majority');
-var conn3 = mongoose.createConnection('mongodb+srv://CianBrophy:w8IgEURgWVHq3t2H@cluster0.gw2st.mongodb.net/login?retryWrites=true&w=majority');
+var conn1 = mongoose.createConnection('mongodb+srv://CianBrophy:w8IgEURgWVHq3t2H@cluster0.gw2st.mongodb.net/bug?retryWrites=true&w=majority', {useNewUrlParser: true, useUnifiedTopology: true});
+var conn2 = mongoose.createConnection('mongodb+srv://CianBrophy:w8IgEURgWVHq3t2H@cluster0.gw2st.mongodb.net/dev?retryWrites=true&w=majority', {useNewUrlParser: true, useUnifiedTopology: true});
+var conn3 = mongoose.createConnection('mongodb+srv://CianBrophy:w8IgEURgWVHq3t2H@cluster0.gw2st.mongodb.net/login?retryWrites=true&w=majority', {useNewUrlParser: true, useUnifiedTopology: true});
 
 var Bug  = conn1.model('Bug', new mongoose.Schema({
   name: String,
@@ -110,17 +111,21 @@ app.post("/newBug", function(req, res) {
 
 app.post("/newDev", function(req, res) {
     console.log("Dev Request Sent!");
-    var newDev = new Dev({
-        firstname: req.body.firstname,
-        secondname: req.body.secondname
-    });
+    if(signIn === false) {
+        console.log("Only admin can update devs!")
+    } else {
+        var newDev = new Dev({
+            firstname: req.body.firstname,
+            secondname: req.body.secondname
+        });
 
-    Dev.create(newDev, function(err, Dev) {
-        if(err)
-            console.log(err);
-        else
-            console.log("Inserted Dev " + newDev);
-    })
+        Dev.create(newDev, function(err, Dev) {
+            if(err)
+                console.log(err);
+            else
+                console.log("Inserted Dev " + newDev);
+        })
+    }
 
     res.redirect("/devs");
 });
@@ -128,34 +133,34 @@ app.post("/newDev", function(req, res) {
 app.post("/deleteDev", function(req, res) {
     console.log("Delete Sent!");
 
-    Dev.deleteOne({_id: new mongodb.ObjectID(req.body.id)}, function(err, results) {
-        if (err){
-            console.log("failed");
-            throw err;
-          }
-          console.log("success");
-       });
+    if(signIn === false) {
+        console.log("Only admin can update devs!")
+    } else {
+        Dev.deleteOne({_id: new mongodb.ObjectID(req.body.id)}, function(err, results) {
+            if (err){
+                console.log("failed");
+                throw err;
+            }
+            console.log("success");
+        });
+    }
 
     res.redirect("/devs");
 });
 
 app.post("/newLogin", function(req, res) {
     console.log("Attempting Login");
-    var newLogin = new Login({
-        username: req.body.user,
-        password: req.body.pass
-    });
+    var username = req.body.username;
+    var password = req.body.password;
 
-    var admin = new Login({
-        username: "admin",
-        password: "admin"
-    });
-
-    if(newLogin != admin) {
+    if(username != "admin" && password != "admin") {
         console.log("Incorrect username/password, please try again");
+        console.log(username);
+        console.log(password);
     }
     else {
         console.log("Login successful!");
+        signIn = true;
     }
 
     res.redirect("/login");
