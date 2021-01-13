@@ -214,4 +214,14 @@ input[type=text] {
   float:left;
 }
 
+.label {
+  display:block;
+}
+
+#pass {
+  width: 100%;
+  padding: 12px 20px;
+  box-sizing: border-box;
+}
+
 
