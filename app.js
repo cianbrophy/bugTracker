@@ -7,9 +7,9 @@ var signIn = false;
 let alert = require('alert');
 var PORT = process.env.PORT || 3000;
 
-var conn1 = mongoose.createConnection('mongodb+srv://CianBrophy:w8IgEURgWVHq3t2H@cluster0.gw2st.mongodb.net/bug?retryWrites=true&w=majority', {useNewUrlParser: true, useUnifiedTopology: true});
-var conn2 = mongoose.createConnection('mongodb+srv://CianBrophy:w8IgEURgWVHq3t2H@cluster0.gw2st.mongodb.net/dev?retryWrites=true&w=majority', {useNewUrlParser: true, useUnifiedTopology: true});
-var conn3 = mongoose.createConnection('mongodb+srv://CianBrophy:w8IgEURgWVHq3t2H@cluster0.gw2st.mongodb.net/login?retryWrites=true&w=majority', {useNewUrlParser: true, useUnifiedTopology: true});
+var conn1 = mongoose.createConnection('mongodb+srv://User:User@cluster0.gw2st.mongodb.net/bug?retryWrites=true&w=majority', {useNewUrlParser: true, useUnifiedTopology: true});
+var conn2 = mongoose.createConnection('mongodb+srv://User:User@cluster0.gw2st.mongodb.net/dev?retryWrites=true&w=majority', {useNewUrlParser: true, useUnifiedTopology: true});
+var conn3 = mongoose.createConnection('mongodb+srv://User:User@cluster0.gw2st.mongodb.net/login?retryWrites=true&w=majority', {useNewUrlParser: true, useUnifiedTopology: true});
 
 var Bug  = conn1.model('Bug', new mongoose.Schema({
   name: String,
