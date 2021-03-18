@@ -76,15 +76,6 @@ body::-webkit-scrollbar-thumb {
   margin : 0 24px;
 }
 
-.navbar:hover {
-  width: 256px;
-}
-
-.navbar:hover .link-text {
-  display:block;
-}
-
-
 .typewriter {
 	padding:15px;
   overflow: hidden; 
